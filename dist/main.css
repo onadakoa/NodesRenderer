@@ -1,0 +1,104 @@
+/*!********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/renderer/Styles/node.css ***!
+  \********************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,500&display=swap);
+/*!************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/renderer/Styles/node.css (1) ***!
+  \************************************************************************************/
+:root{
+    --nodesBack: rgb(33, 33, 33);
+}
+
+.node {
+    background-color: red;
+    position: absolute;
+
+    border-radius: 5px;
+    min-width: max-content;
+    min-height: 300px;
+    background-color: var(--nodesBack);
+
+    font-family: "Roboto", sans-serif;
+
+    border: 2px black solid;
+}
+
+.node:hover {
+    border: 2px white;
+    border-style: solid;
+}
+
+.NodeHead {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: red;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.NodeHead p {
+    font-style: italic;
+    text-decoration: underline;
+    color: rgba(0,0,0, 0.8);
+}
+
+.NodeHead * {
+    padding: 5px;
+}
+
+.NodeBody {
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NodeBody * {
+    --LRPadding: 10px;
+    padding: 3px;
+    padding-left: var(--LRPadding);
+    padding-right: var(--LRPadding);
+
+    display: block;
+
+}
+/*!**********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/renderer/Styles/styles.css ***!
+  \**********************************************************************************/
+:root{
+    --backGrad: radial-gradient( rgb(44, 44, 53) 1% ,rgb(21, 21, 37) 100%);
+    --Grid: radial-gradient(
+        rgba(255,255,255,0.1) 10%,
+        transparent 10%
+    )
+}
+
+body {
+    user-select: none;
+    background-color: black;
+    overflow: hidden;
+    height: 100%;
+}
+
+.Nodes_Container {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+
+    position: relative;
+}
+
+.BackGround {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    background-image: var(--Grid);
+    background-size: 100px 100px;
+    background-position: 0px 0px;
+}

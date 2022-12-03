@@ -1,0 +1,34 @@
+:root{
+    --backGrad: radial-gradient( rgb(44, 44, 53) 1% ,rgb(21, 21, 37) 100%);
+    --Grid: radial-gradient(
+        rgba(255,255,255,0.1) 10%,
+        transparent 10%
+    )
+}
+
+body {
+    user-select: none;
+    background-color: black;
+    overflow: hidden;
+    height: 100%;
+}
+
+.Nodes_Container {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+
+    position: relative;
+}
+
+.BackGround {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    background-image: var(--Grid);
+    background-size: 100px 100px;
+    background-position: 0px 0px;
+}
