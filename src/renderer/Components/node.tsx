@@ -30,14 +30,18 @@ export default class Node extends React.Component<PROPS> {
 
     MouseMove = (e: MouseEvent) => {
         if (!this.state.Hover) return;
-        this.setState({x: Normalize(e.pageX - this.diffX, this.NormMulti), y: Normalize(e.pageY - this.diffY, this.NormMulti)})
+        let x = e.pageX / this.props.CamScale;
+        let y = e.pageY / this.props.CamScale;
+        this.setState({x: Normalize(x - this.diffX, this.NormMulti), y: Normalize(y - this.diffY, this.NormMulti)})
     }
     
     MouseDown = (e: React.MouseEvent) => {
         if (e.button != 0) return;
-        this.diffX = e.pageX - this.state.x;
-        this.diffY = e.pageY - this.state.y;
-        let nwstate = {...this.state}
+        let x = e.pageX / this.props.CamScale;
+        let y = e.pageY / this.props.CamScale;
+        this.diffX = x - this.state.x
+        this.diffY = y - this.state.y
+        let nwstate = { ...this.state }
         nwstate.Hover = true;
         this.setState(nwstate)
     }
