@@ -30,7 +30,7 @@ export default class Node extends React.Component<PROPS> {
 
     MouseMove = (e: MouseEvent) => {
         if (!this.state.Hover) return;
-        let x = e.pageX / this.props.CamScale;
+        let x = e.pageX / this.props.CamScale; 
         let y = e.pageY / this.props.CamScale;
         this.setState({x: Normalize(x - this.diffX, this.NormMulti), y: Normalize(y - this.diffY, this.NormMulti)})
     }

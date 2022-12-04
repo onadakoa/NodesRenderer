@@ -50,8 +50,8 @@ export class Camera {
     }
 
     private OnScrol = (ev: WheelEvent) => {
-        this.Scale = Clamp(+(this.Scale - +(ev.deltaY / 1000).toFixed(1)).toFixed(1), 1.5, 0.1)
-        this.Notify()
+        this.Scale = Clamp(+(this.Scale - +(ev.deltaY / 1000).toFixed(1)).toFixed(1), 1.5, 0.1);
+        this.Notify();
     }
 
     private OnMouseDown = (ev: MouseEvent) => {
