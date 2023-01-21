@@ -80,3 +80,51 @@ export class Camera {
         this.NotifyListeners.forEach((f) => f())
     }
 }
+
+export class Selectioner {
+    SelectedId: number[] = []
+
+
+
+    constructor() {
+        addEventListener("mousedown", this.MouseDown)
+    }
+
+
+    MouseDown = (ev: MouseEvent) => {
+        if (ev.button != 0) return;
+        // this.ClearAll()
+    }
+
+
+    forEach = (f: (v: number, i: number) => void) => {
+        for (let i = 0; i < this.SelectedId.length; i++) {
+            f(this.SelectedId[i], i);
+        }
+    }
+
+    ISelected = (id: number): boolean => {
+        let p = false;
+        this.SelectedId.forEach((v) => {
+            if (v == id) p = true;
+        })
+        return p;
+    }
+
+    RemoveSeleced = (id: number) => {
+        this.SelectedId = this.SelectedId.filter(v => v != id)
+    }
+
+    ClearAll = () => {
+        this.SelectedId = [];
+    }
+
+    AddSelection = (id: number) => {
+        if (this.ISelected(id)) return 1;
+        this.SelectedId.push(id);
+    }
+
+
+
+
+}

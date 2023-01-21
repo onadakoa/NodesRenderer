@@ -1,18 +1,20 @@
 import React from "react"
-import { InitializedNode, Normalize, Camera } from "./libs";
+import { InitializedNode, Normalize, Camera, Selectioner } from "./libs";
 import "../Styles/node.css"
 
 interface PROPS {
     Node: InitializedNode;
     MakeMeOnTop: (id: number) => void;
     CamScale: number;
+    Selectioner: Selectioner;
 }
 
 export default class Node extends React.Component<PROPS> {
     state = {
         x: this.props.Node.position.x,
         y: this.props.Node.position.y,
-        Hover: false
+        Hover: false,
+        // Selected: false
     }
     diffX: number = 0;
     diffY: number = 0;
@@ -43,6 +45,10 @@ export default class Node extends React.Component<PROPS> {
         this.diffY = y - this.state.y
         let nwstate = { ...this.state }
         nwstate.Hover = true;
+
+        this.props.Selectioner.AddSelection(this.props.Node.id)
+        // nwstate.Selected = true;
+        
         this.setState(nwstate)
     }
 
@@ -55,18 +61,29 @@ export default class Node extends React.Component<PROPS> {
         this.props.MakeMeOnTop(this.props.Node.id)
     }
 
+    GetSelectionColor = (): string => {
+
+        if (this.state.Hover) return "yellow"
+        if (this.props.Selectioner.ISelected(this.props.Node.id)) return "white"
+
+        return "black";
+    }
+
     GetMainStyles = (): object => {
         let st = {
             transform: "translate(" + this.state.x + "px," + this.state.y + "px)",
             zIndex: (this.state.Hover) ? 2 : 1,
-            scale: this.props.CamScale.toString()
+            scale: this.props.CamScale.toString(),
+            border: ("2px " + (this.GetSelectionColor()) + " solid")
         }
+        // console.log(st)
         return st;    
     }
 
+
     render(): React.ReactNode {
 
-        return (<div className="node" style={this.GetMainStyles()} onMouseDown={this.MouseDown}  >
+        return (<div className="node" style={this.GetMainStyles()} onMouseDown={this.MouseDown} >
             <div className="NodeHead">
                 <span className="material-symbols-outlined">input</span>
                 <p>{this.props.Node.name}</p>

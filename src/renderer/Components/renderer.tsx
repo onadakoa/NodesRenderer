@@ -1,7 +1,7 @@
 import React, { MouseEvent } from "react";
 
 // components
-import {CachedNode, InitializedNode, EmptyNode, Camera} from "./libs"
+import {CachedNode, InitializedNode, EmptyNode, Camera, Selectioner} from "./libs"
 import Node from "./node";
 import BackGround from "./BackGround"
 
@@ -14,6 +14,7 @@ interface PROPS {
 
 export default class Renderer extends React.Component<PROPS> {
     Camera: Camera
+    Selectioner: Selectioner
     
     constructor(props: PROPS) {
         super(props);
@@ -24,6 +25,8 @@ export default class Renderer extends React.Component<PROPS> {
 
         this.Camera = new Camera();
         this.Camera.OnChange(this.OnCameraChangeEvent)
+
+        this.Selectioner = new Selectioner();
     }
     
     private OnCameraChangeEvent = () => {
@@ -59,11 +62,15 @@ export default class Renderer extends React.Component<PROPS> {
     }
 
 
+    OnBGClicked = (ev: React.MouseEvent) => {
+        this.Selectioner.ClearAll()
+    }
+
 
     render(): React.ReactNode {
         
         const NodesContainerStyles = {
-            transform: "translate("+ this.state.CamX + "px," + this.state.CamY + "px)",
+            transform: "translate(" + this.state.CamX + "px," + this.state.CamY + "px)",
         }
 
         return (<>
@@ -72,7 +79,7 @@ export default class Renderer extends React.Component<PROPS> {
                 {this.state.NodesHierarchy.map((v) => {
                     let n = this.GetNodeById(v);
                     if (n.id == -1) return;
-                    return <Node key={n.id} Node={n} MakeMeOnTop={ this.MakeNodeOnTop } CamScale={this.state.CamScale} />
+                    return <Node key={n.id} Node={n} MakeMeOnTop={ this.MakeNodeOnTop } CamScale={this.state.CamScale} Selectioner={this.Selectioner} />
                 })}
             </div>
         
