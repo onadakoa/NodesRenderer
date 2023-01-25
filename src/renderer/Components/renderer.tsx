@@ -64,6 +64,7 @@ export default class Renderer extends React.Component<PROPS> {
 
     OnBGClicked = (ev: React.MouseEvent) => {
         this.Selectioner.ClearAll()
+        this.setState(this.state)
     }
 
 
@@ -74,8 +75,8 @@ export default class Renderer extends React.Component<PROPS> {
         }
 
         return (<>
-            <BackGround CamX={this.state.CamX} CamY={this.state.CamY} CamScale={this.state.CamScale} />
-            <div className="Nodes_Container" style={NodesContainerStyles} >
+            <BackGround CamX={this.state.CamX} CamY={this.state.CamY} CamScale={this.state.CamScale} backGroundClickedEvent={this.OnBGClicked} />
+            <div className="Nodes_Container" style={NodesContainerStyles} > 
                 {this.state.NodesHierarchy.map((v) => {
                     let n = this.GetNodeById(v);
                     if (n.id == -1) return;

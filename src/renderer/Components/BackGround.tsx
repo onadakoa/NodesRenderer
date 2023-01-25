@@ -4,7 +4,7 @@ interface PROPS {
     CamX: number;
     CamY: number;
     CamScale: number;
-    // backGroundClickedEvent: (event: React.MouseEvent) => void;
+    backGroundClickedEvent: (event: React.MouseEvent) => void;
 }
 
 export default class BackGround extends React.Component<PROPS> {
@@ -46,7 +46,7 @@ export default class BackGround extends React.Component<PROPS> {
     }
 
     click = (ev: React.MouseEvent) => {
-        console.log("background clicked")
+        this.props.backGroundClickedEvent(ev);
     }
 
     render(): React.ReactNode {
