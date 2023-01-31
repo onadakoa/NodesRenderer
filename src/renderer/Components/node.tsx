@@ -46,9 +46,17 @@ export default class Node extends React.Component<PROPS> {
         let nwstate = { ...this.state }
         nwstate.Hover = true;
 
-        this.props.Selectioner.AddSelection(this.props.Node.id)
-        // nwstate.Selected = true;
-        
+        if (e.shiftKey) {
+            if (this.props.Selectioner.ISelected(this.props.Node.id)) 
+                this.props.Selectioner.RemoveSeleced(this.props.Node.id);
+            else 
+                this.props.Selectioner.AddToSelections(this.props.Node.id);
+        }
+        else {
+            this.props.Selectioner.AddSelection(this.props.Node.id);
+        }
+
+        console.log(this.props.Selectioner.SelectionsAmount());
         this.setState(nwstate)
     }
 
@@ -59,6 +67,7 @@ export default class Node extends React.Component<PROPS> {
         nwstate.Hover = false;
         this.setState(nwstate)
         this.props.MakeMeOnTop(this.props.Node.id)
+        this.props.Node.position = {x: this.state.x , y: this.state.y}
     }
 
     GetSelectionColor = (): string => {

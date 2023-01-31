@@ -1,7 +1,7 @@
 import React, { MouseEvent } from "react";
 
 // components
-import {CachedNode, InitializedNode, EmptyNode, Camera, Selectioner} from "./libs"
+import {CachedNode, InitializedNode, EmptyNode, Camera, Selectioner, Input} from "./libs"
 import Node from "./node";
 import BackGround from "./BackGround"
 
@@ -15,6 +15,7 @@ interface PROPS {
 export default class Renderer extends React.Component<PROPS> {
     Camera: Camera
     Selectioner: Selectioner
+    Input: Input
     
     constructor(props: PROPS) {
         super(props);
@@ -27,6 +28,12 @@ export default class Renderer extends React.Component<PROPS> {
         this.Camera.OnChange(this.OnCameraChangeEvent)
 
         this.Selectioner = new Selectioner();
+        this.Input = new Input();
+
+
+        this.Input.ButtonDown('p', (ev) => {
+            console.log(this.Nodes);
+        })
     }
     
     private OnCameraChangeEvent = () => {

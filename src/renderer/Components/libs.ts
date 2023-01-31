@@ -120,11 +120,43 @@ export class Selectioner {
     }
 
     AddSelection = (id: number) => {
-        if (this.ISelected(id)) return 1;
-        this.SelectedId.push(id);
+        if (this.ISelected(id)) return 0;
+        this.SelectedId = [id];
+        return 1
     }
 
+    AddToSelections = (id: number) => {
+        if (this.ISelected(id)) return 0;
+        this.SelectedId.push(id);
+        return 1;
+    }
+
+    SelectionsAmount = (): number => this.SelectedId.length;
 
 
+}
+
+interface InputListener {
+    key: string;
+    listener: (ev: KeyboardEvent | MouseEvent | any) => void;
+}
+export class Input {
+    constructor() {
+        document.addEventListener("keydown", this.onButtonClick);
+    }
+
+    onKeyDownEventsListeners: InputListener[] = [];
+
+    private onButtonClick = (ev: KeyboardEvent) => {
+        for (const v of this.onKeyDownEventsListeners) {
+            if (v.key == ev.key) {
+                v.listener(ev);
+            }
+        }
+    }
+
+    ButtonDown = (Input: string, lis: (ev: KeyboardEvent) => void) => {
+        this.onKeyDownEventsListeners.push({ key: Input, listener: lis });
+    }
 
 }
